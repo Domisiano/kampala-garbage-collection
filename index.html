@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kampala Garbage Collection Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>s
+  <header>
+    <h1>Kampala Garbage Collection Portal</h1>
+    <p>Track schedules, request pickups, and keep your community clean.</p>
+  </header>
+
+  <section id="schedule">
+    <h2>Truck Schedule by Parish</h2>
+    <table>
+      <tr><th>Parish</th><th>Next Collection</th></tr>
+      <tr><td>Makindye</td><td>Tomorrow 8:00 AM</td></tr>
+      <tr><td>Kawempe</td><td>Monday 9:00 AM</td></tr>
+    </table>
+  </section>
+
+  <section id="alerts">
+    <h2>Sign Up for Alerts</h2>
+    <input type="text" placeholder="Enter phone number">
+    <button onclick="signUp()">Subscribe</button>
+  </section>
+
+  <section id="feedback">
+    <h2>Report Missed Pickup</h2>
+    <textarea placeholder="Describe the issue..."></textarea>
+    <button onclick="sendFeedback()">Submit</button>
+  </section>
+
+  <footer>
+    <p>© 2026 Kampala Clean City Initiative | SDG 11: Sustainable Cities</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
