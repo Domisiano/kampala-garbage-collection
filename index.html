@@ -3,40 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kampala Garbage Collection Portal</title>
+  <meta name="theme-color" content="#0f7b4d">
+  <title>CleanLoop | Kampala Waste-to-Value Network</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Kampala Garbage Collection Portal</h1>
-    <p>Track schedules, request pickups, and keep your community clean.</p>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">♻</span><div><strong>CleanLoop</strong><small>Kampala Waste-to-Value Network</small></div></div>
+    <nav>
+      <button class="nav-btn active" data-view="home">Dashboard</button>
+      <button class="nav-btn" data-view="collect">Request Collection</button>
+      <button class="nav-btn" data-view="agent">Green Agent</button>
+      <button class="nav-btn" data-view="market">Marketplace</button>
+      <button class="nav-btn" data-view="impact">Impact</button>
+    </nav>
   </header>
 
-  <section id="schedule">
-    <h2>Truck Schedule by Parish</h2>
-    <table>
-      <tr><th>Parish</th><th>Next Collection</th></tr>
-      <tr><td>Makindye</td><td>Tomorrow 8:00 AM</td></tr>
-      <tr><td>Kawempe</td><td>Monday 9:00 AM</td></tr>
-    </table>
-  </section>
+  <main>
+    <section id="home" class="view active">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">♻ SORT • COLLECT • RECOVER • EARN</span>
+          <h1>Turn Kampala's waste into value.</h1>
+          <p>CleanLoop connects households and businesses with youth collectors, recovery hubs and recyclers—creating cleaner communities and green livelihoods.</p>
+          <div class="hero-actions"><button class="primary" data-go="collect">Request a collection</button><button class="secondary" data-go="market">View recovered materials</button></div>
+        </div>
+        <div class="hero-card"><div class="hero-icon">♻</div><strong>Today's network</strong><p>Waste recovery is being organized from source to verified destination.</p><span class="live"><i></i> MVP demo active</span></div>
+      </div>
 
-  <section id="alerts">
-    <h2>Sign Up for Alerts</h2>
-    <input type="text" placeholder="Enter phone number">
-    <button onclick="signUp()">Subscribe</button>
-  </section>
+      <div class="stats" id="homeStats"></div>
 
-  <section id="feedback">
-    <h2>Report Missed Pickup</h2>
-    <textarea placeholder="Describe the issue..."></textarea>
-    <button onclick="sendFeedback()">Submit</button>
-  </section>
+      <div class="grid two">
+        <article class="card"><div class="card-head"><h2>Waste Intelligence</h2><span class="badge green">Live demo</span></div><div class="hotspot-list" id="hotspots"></div></article>
+        <article class="card"><div class="card-head"><h2>Upcoming Collections</h2><span class="muted">Kampala</span></div><div class="schedule" id="scheduleList"></div></article>
+      </div>
 
-  <footer>
-    <p>© 2026 Kampala Clean City Initiative | SDG 11: Sustainable Cities</p>
-  </footer>
+      <div class="card pathway"><div><span class="eyebrow">THE CLEANLOOP</span><h2>One connected recovery loop</h2><p>From a separated bottle at a household to a verified recycler, every handoff creates measurable environmental and economic value.</p></div><div class="flow"><span>Household</span><b>→</b><span>Green Agent</span><b>→</b><span>Recovery Hub</span><b>→</b><span>Recycler</span></div></div>
+    </section>
 
+    <section id="collect" class="view">
+      <div class="section-title"><div><span class="eyebrow">CITIZEN / BUSINESS</span><h1>Request a collection</h1><p>Separate your materials, tell us what you have, and connect to a nearby Green Agent.</p></div><span class="points-pill">★ <span id="pointsTop">0</span> Green Points</span></div>
+      <div class="grid two">
+        <article class="card">
+          <form id="collectionForm">
+            <label>Name<input name="name" required placeholder="Your name"></label>
+            <label>Phone<input name="phone" required placeholder="07XX XXX XXX"></label>
+            <label>Area<select name="area" required><option value="">Select area</option><option>Makindye</option><option>Kawempe</option><option>Rubaga</option><option>Nakawa</option><option>Central</option></select></label>
+            <label>Material<select name="material" required><option value="">Select material</option><option>PET Plastic</option><option>Other Plastic</option><option>Paper / Cardboard</option><option>Metal</option><option>Glass</option><option>Organic Waste</option></select></label>
+            <div class="form-row"><label>Estimated weight (kg)<input name="weight" type="number" min="1" step="0.1" required placeholder="e.g. 10"></label><label>Preferred time<select name="time"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label></div>
+            <label>Notes<textarea name="notes" placeholder="Anything the collector should know?"></textarea></label>
+            <button class="primary full" type="submit">♻ Submit collection request</button>
+          </form>
+          <div id="collectionResult" class="success-box hidden"></div>
+        </article>
+        <article class="card info-card"><h2>Why separate?</h2><div class="info-item"><span>01</span><div><strong>Higher recovery value</strong><p>Clean, separated materials are easier to aggregate and sell to recovery partners.</p></div></div><div class="info-item"><span>02</span><div><strong>Youth livelihoods</strong><p>Your request can create a paid collection opportunity for a CleanLoop Green Agent.</p></div></div><div class="info-item"><span>03</span><div><strong>Traceable recovery</strong><p>Each completed collection contributes to CleanLoop's recovery and impact records.</p></div></div></article>
+      </div>
+    </section>
+
+    <section id="agent" class="view">
+      <div class="section-title"><div><span class="eyebrow">GREEN AGENT</span><h1>Collection operations</h1><p>A simple workflow for youth collectors to accept, collect and hand over recoverable materials.</p></div><span class="agent-status">● Available</span></div>
+      <div class="stats" id="agentStats"></div>
+      <article class="card"><div class="card-head"><h2>Open collection requests</h2><button class="secondary small-btn" id="resetDemo">Reset demo data</button></div><div id="requestsList" class="request-list"></div></article>
+    </section>
+
+    <section id="market" class="view">
+      <div class="section-title"><div><span class="eyebrow">RECOVERY MARKETPLACE</span><h1>Recovered materials</h1><p>Aggregate verified materials so recyclers and processors can find reliable supply.</p></div><span class="badge green">Prototype marketplace</span></div>
+      <div class="market-grid" id="marketGrid"></div>
+      <article class="card marketplace-callout"><div><span class="eyebrow">BUSINESS MODEL</span><h2>From waste collection to material transactions</h2><p>CleanLoop can earn through recovery transaction fees, business subscriptions, institutional collection contracts and aggregation services.</p></div><button class="primary" data-go="impact">See the impact model</button></article>
+    </section>
+
+    <section id="impact" class="view">
+      <div class="section-title"><div><span class="eyebrow">MEASURABLE IMPACT</span><h1>CleanLoop Impact Dashboard</h1><p>Every collection is converted into measurable environmental, economic and community outcomes.</p></div><span class="badge dark">Demo data</span></div>
+      <div class="stats" id="impactStats"></div>
+      <div class="grid two"><article class="card"><h2>Material recovery</h2><div id="materialBars"></div></article><article class="card"><h2>CleanLoop Green Score</h2><div class="score-ring"><strong id="scoreValue">82</strong><span>/100</span></div><p class="center muted">Community participation score</p><div class="score-items"><span>✓ Sorting participation</span><span>✓ Collection consistency</span><span>✓ Recovery contribution</span></div></article></div>
+      <article class="card certificate"><div class="certificate-icon">✓</div><div><span class="eyebrow">PROOF OF RECOVERY</span><h2 id="certificateTitle">CleanLoop Recovery Record</h2><p id="certificateText">Verified material handovers create a traceable chain from collection to recovery.</p></div></article>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <footer><strong>CleanLoop</strong> — Kampala Waste-to-Value Network <span>•</span> MVP prototype <span>•</span> SDG 11</footer>
   <script src="script.js"></script>
 </body>
 </html>
